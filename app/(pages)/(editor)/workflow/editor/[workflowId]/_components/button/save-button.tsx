@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { useReactFlow } from '@xyflow/react'
 import { CheckIcon } from 'lucide-react'
 import { useMutation } from '@tanstack/react-query'
+import { toast } from 'sonner'
 
 export default function SaveButton({
   workflowId
@@ -15,8 +16,8 @@ export default function SaveButton({
 
   const saveMutation = useMutation({
     mutationFn: UpdateWorkflow,
-    onSuccess: () => {},
-    onError: () => {}
+    onSuccess: () => { toast.success('Workflow saved successfully', { id: "save-workflow" }) },
+    onError: () => { toast.error('Failed to save workflow', { id: "save-workflow" }) }
   })
 
   const handleSave = () => {

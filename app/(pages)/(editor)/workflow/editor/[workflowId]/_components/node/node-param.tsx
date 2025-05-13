@@ -1,35 +1,37 @@
 "use client"
 
-import { Input } from "@/components/ui/input";
 import { TaskParamType } from "@/constants/workflow.constant";
-import { AppNode, TaskParam } from "@/types/node.type";
+import { TaskParam } from "@/types/node.type";
+
 import StringParam from "../param/string-param";
-import { useReactFlow } from "@xyflow/react";
-import { useCallback } from "react";
+import FileParam from "../param/file-param";
 
 
-export function NodeParamField({ param, nodeId }: { param: TaskParam, nodeId: string }) {
-  const { updateNodeData, getNode } = useReactFlow();
-  const node = getNode(nodeId) as AppNode;
-  const value = node?.data.inputs?.[param.name];
-
-  const updateNodeParamValue = useCallback((newValue: string) => {
-    updateNodeData(nodeId, {
-      inputs: {
-        ...node?.data.inputs,
-        [param.name]: newValue
-      }
-    })
-  }, [updateNodeData, param.name, node?.data.inputs])
-
+export function NodeParamField({
+  param,
+  value,
+  onChange,
+}: {
+  param: TaskParam;
+  value: any;
+  onChange: (value: any) => void;
+}) {
   switch (param.type) {
     case TaskParamType.STRING:
-      return <StringParam param={param} value={value} updateNodeParamValue={updateNodeParamValue} />
+      return <StringParam param={param} value={value} onChange={onChange} />;
+    case TaskParamType.INTEGER_NUMBER:
+      return <StringParam param={param} value={value} onChange={onChange} />;
+    case TaskParamType.FLOAT_NUMBER:
+      return <StringParam param={param} value={value} onChange={onChange} />;
+    case TaskParamType.BOOLEAN:
+      return <StringParam param={param} value={value} onChange={onChange} />;
+    case TaskParamType.FILE:
+      return <FileParam param={param} value={value} onChange={onChange} />;
     default:
       return (
         <div className="w-full">
           <div className="text-xs text-muted-foreground">Not Implemented</div>
         </div>
-      )
+      );
   }
 }

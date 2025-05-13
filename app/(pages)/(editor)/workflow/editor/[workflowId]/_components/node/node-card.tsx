@@ -2,13 +2,13 @@
 
 import { Badge } from '@/components/ui/badge';
 import { TaskType } from '@/constants/workflow.constant';
-import { TaskRegistry } from '@/lib/task-registry';
+import { TaskRegistry } from '@/lib/registry';
 import { cn } from '@/lib/utils';
 import { TaskParam } from '@/types/node.type';
 import { Handle, Position } from '@xyflow/react';
-import { FlagIcon } from 'lucide-react';
+import { FlagIcon, GripVerticalIcon } from 'lucide-react';
 import React from 'react'
-import { NodeParamField } from './node-param';
+import { Button } from '@/components/ui/button';
 
 export function NodeCard({
   children,
@@ -22,7 +22,7 @@ export function NodeCard({
   return (
     <div
       className={cn(
-        'rounded-md cursor-pointer bg-background border-2 border-separate w-[420px] text-xs gap-1 flex flex-col',
+        'rounded-md cursor-pointer bg-background border-2 border-separate w-[420px] text-xs gap-1 p-0.5 flex flex-col',
         isSelected && "border-blue-500",
       )}
     >
@@ -55,6 +55,9 @@ export function NodeCardHeader({
           <Badge variant="secondary" className="text-xs">
             {task.category}
           </Badge>
+          <Button variant={"ghost"} size={"icon"} className="drag-handle">
+            <GripVerticalIcon />
+          </Button>
         </div>
       </div>
     </div>
@@ -63,7 +66,7 @@ export function NodeCardHeader({
 
 export function NodeCardInputBody({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-col divide-y gap-2">
+    <div className="flex flex-col divide-y gap-1">
       {children}
     </div>
   )
@@ -71,18 +74,45 @@ export function NodeCardInputBody({ children }: { children: React.ReactNode }) {
 
 export function NodeCardInput({ input, nodeId }: { input: TaskParam, nodeId: string }) {
   return (
-    <div className="flex justify-start relative p-3 bg-secondary w-full rounded-b-md">
-      <NodeParamField param={input} nodeId={nodeId} />
+    <div className="flex justify-start relative p-3 bg-secondary w-full">
       {!input.hideHandle && (
-        <Handle
-          id={input.name}
-          type="target"
-          position={Position.Left}
-          className={cn(
-            "!bg-muted-foreground !border-2 !border-background !-left-2 !w-4 !h-4",
-          )}
-        />
+        <>
+          <div className="text-xs ">{input.name}</div>
+          <Handle
+            id={input.name}
+            type="target"
+            position={Position.Left}
+            className={cn(
+              "!bg-muted-foreground !border-2 !border-background !-left-1 !w-3.5 !h-3.5",
+            )}
+          />
+        </>
       )}
+    </div>
+  )
+}
+
+export function NodeCardOutputBody({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col divide-y gap-1">
+      {children}
+    </div>
+  )
+}
+
+export function NodeCardOutput({ output, nodeId }: { output: TaskParam, nodeId: string }) {
+  console.log("output", output);
+  return (
+    <div className="flex justify-end relative p-3 bg-secondary w-full">
+      <div className="text-xs ">{output.name}</div>
+      <Handle
+        id={output.name}
+        type="source"
+        position={Position.Right}
+        className={cn(
+          "!bg-muted-foreground !border-2 !border-background !-right-1 !w-3.5 !h-3.5",
+        )}
+      />
     </div>
   )
 }

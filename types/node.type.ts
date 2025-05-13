@@ -12,6 +12,7 @@ export interface AppNode extends Node {
 }
 
 export interface TaskParam {
+  id: string;
   name: string;
   type: TaskParamType;
   helperText?: string;

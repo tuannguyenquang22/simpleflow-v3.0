@@ -1,4 +1,5 @@
 import { TaskParamType, TaskType } from "@/constants/workflow.constant";
+import { WorkflowTask } from "@/types/workflow.type";
 import { LucideProps, Paperclip } from "lucide-react";
 
 export const FileUploader = {
@@ -9,11 +10,25 @@ export const FileUploader = {
   category: "Data Source",
   inputs: [
     {
+      id: "trigger_in",
+      name: "Trigger",
+      type: TaskParamType.TRIGGER,
+      hideHandle: false,
+    },
+    { 
+      id: "file_in",
       name: "File",
-      type: TaskParamType.STRING,
+      type: TaskParamType.FILE,
       hideHandle: true,
       required: true, 
+      helperText: "Upload a file to use as input for the workflow.",
     }
   ],
-  outputs: []
-}
+  outputs: [
+    {
+      id: "dataframe_out",
+      name: "Data Frame",
+      type: TaskParamType.DATAFRAME,
+    }
+  ]
+} satisfies WorkflowTask;
