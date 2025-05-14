@@ -1,11 +1,8 @@
-"use client"
-
 import { TaskParamType } from "@/constants/workflow.constant";
 import { TaskParam } from "@/types/node.type";
 
 import StringParam from "../param/string-param";
 import FileParam from "../param/file-param";
-
 
 export function NodeParamField({
   param,

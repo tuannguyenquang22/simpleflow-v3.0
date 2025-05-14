@@ -7,6 +7,7 @@ import { NodeParamField } from "./node/node-param";
 import { Button } from "@/components/ui/button";
 import { CheckIcon } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 function ParamConfig({ nodeId }: { nodeId: string }) {
   const { getNode, updateNodeData } = useReactFlow();
@@ -26,7 +27,7 @@ function ParamConfig({ nodeId }: { nodeId: string }) {
     updateNodeData(nodeId, {
       inputs: formData
     });
-    console.log("Saved data: ", formData);
+    toast.success("Node parameters updated", { id: "node-update" });
   };
 
   return (

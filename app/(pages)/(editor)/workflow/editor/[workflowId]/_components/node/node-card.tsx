@@ -101,7 +101,6 @@ export function NodeCardOutputBody({ children }: { children: React.ReactNode }) 
 }
 
 export function NodeCardOutput({ output, nodeId }: { output: TaskParam, nodeId: string }) {
-  console.log("output", output);
   return (
     <div className="flex justify-end relative p-3 bg-secondary w-full">
       <div className="text-xs ">{output.name}</div>

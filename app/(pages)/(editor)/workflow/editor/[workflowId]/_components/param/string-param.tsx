@@ -8,7 +8,6 @@ import { TaskParam } from "@/types/node.type";
 import { CircleHelpIcon } from "lucide-react";
 import { useId } from "react"
 
-
 function StringParam({
   param,
   value,
@@ -35,7 +34,6 @@ function StringParam({
             </TooltipContent>
           </Tooltip>
         )}
-        {param.required && <p className="text-red-400">(required)</p>}
       </Label>
 
       {param.options ? (
