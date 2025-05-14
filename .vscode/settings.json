@@ -1,6 +1,14 @@
 {
+  "editor.fontFamily": "JetBrains Mono, monospace",
+  "terminal.integrated.fontFamily": "monospace",
+  "editor.fontSize": 13,
   "[python]": {
-    "editor.defaultFormatter": "ms-python.python",
     "editor.tabSize": 4
+  },
+  "[typescript]": {
+    "editor.tabSize": 2
+  },
+  "[typescriptreact]": {
+    "editor.tabSize": 2
   }
 }

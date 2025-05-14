@@ -11,8 +11,12 @@ export interface AppNode extends Node {
   data: AppNodeData;
 }
 
+export type AppNodeMissingInputs = {
+  nodeId: string;
+  inputs: string[];
+}
+
 export interface TaskParam {
-  id: string;
   name: string;
   type: TaskParamType;
   helperText?: string;
